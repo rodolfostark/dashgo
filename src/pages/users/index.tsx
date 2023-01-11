@@ -5,7 +5,6 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useState } from "react";
-import { GetServerSideProps } from "next";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 
 import api from "../../services/api";
@@ -13,7 +12,7 @@ import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
 import { Pagination } from "../../components/Pagination";
 import { queryClient } from "../../services/queryClient";
-import { getUsers, useUsers } from "../../services/hooks/users/useUsers";
+import { useUsers } from "../../services/hooks/users/useUsers";
 
 export default function UserList() {
     const [page, setPage] = useState(1);
@@ -133,14 +132,3 @@ export default function UserList() {
         </Box>
     );
 }
-
-export const getServerSideProps: GetServerSideProps = async () => {
-    const { users, totalCount } = await getUsers(1);
-
-    return {
-        props: {
-            users,
-            totalCount,
-        }
-    };
-};
